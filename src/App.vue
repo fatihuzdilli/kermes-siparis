@@ -3,13 +3,14 @@
     <nav class="navbar navbar-expand-sm bg-light">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">Home</router-link>
+          <router-link :to="{ name: 'List' }" class="nav-link"
+            >List</router-link
+          >
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'Add' }" class="nav-link">Add Item</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'List' }" class="nav-link">All Item</router-link>
+          <router-link :to="{ name: 'Add' }" class="nav-link"
+            >Add Item</router-link
+          >
         </li>
       </ul>
     </nav>
@@ -20,18 +21,17 @@
 </template>
 
 <style lang="css">
-  @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 </style>
 
 <style>
-  .gap {
-    margin-top: 50px;
-  }
+.gap {
+  margin-top: 50px;
+}
 </style>
 
 <script>
-
 export default {
-  name: 'app'
-}
+  name: "app",
+};
 </script>

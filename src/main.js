@@ -7,8 +7,7 @@ import App from "./App.vue";
 
 import AddItem from "./components/AddItem.vue";
 import EditItem from "./components/EditItem.vue";
-import ListItem from "./components/ListItem.vue";
-import Home from "./components/Home.vue";
+import List from "./components/List.vue";
 
 import "../node_modules/nprogress/nprogress.css";
 
@@ -18,9 +17,9 @@ Vue.config.productionTip = false;
 
 const routes = [
   {
-    name: "Home",
+    name: "List",
     path: "/",
-    component: Home
+    component: List
   },
   {
     name: "Add",
@@ -31,11 +30,6 @@ const routes = [
     name: "Edit",
     path: "/edit/:id",
     component: EditItem
-  },
-  {
-    name: "List",
-    path: "/index",
-    component: ListItem
   }
 ];
 
