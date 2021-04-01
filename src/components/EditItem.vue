@@ -7,7 +7,15 @@
       title="Edit Item"
       submitLabel="Update"
     />
-
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <button
       v-if="newItem.status != 'DELETED'"
       @click="markItemAsDeleted()"

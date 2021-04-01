@@ -59,18 +59,20 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="row">
             <input
               type="submit"
               class="btn btn-primary"
               v-model="submitLabel"
             />
-            <input
-              type="button"
-              class="btn btn-primary"
-              value="Cancel"
-              v-on:click="onCancel"
-            />
+            <div class="col">
+              <input
+                type="button"
+                class="btn btn-warning"
+                value="Cancel"
+                v-on:click="onCancel"
+              />
+            </div>
           </div>
         </form>
       </div>

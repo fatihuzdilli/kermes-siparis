@@ -1,18 +1,19 @@
 <template>
   <div>
-    <div
-      class="navbar navbar-expand-sm bg-light"
-      v-for="urun in urunler"
-      v-bind:key="urun['.key']"
-    >
-      <router-link
-        :to="{ name: 'Add', params: { key: urun['.key'] } }"
-        class="btn btn-danger"
+    <div class="row">
+      <div
+        class="navbar navbar-expand-sm bg-light"
+        v-for="urun in urunler"
+        v-bind:key="urun['.key']"
       >
-        {{ urun.product }}
-      </router-link>
+        <router-link
+          :to="{ name: 'Add', params: { key: urun['.key'] } }"
+          class="btn btn-danger"
+        >
+          + {{ urun.product }}
+        </router-link>
+      </div>
     </div>
-
     <h4>Done</h4>
     <table class="table table-striped">
       <thead>
