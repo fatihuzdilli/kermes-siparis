@@ -7,6 +7,14 @@
       title="Edit Item"
       submitLabel="Update"
     />
+
+    <button
+      v-if="newItem.status != 'DELETED'"
+      @click="markItemAsDeleted()"
+      class="btn btn-danger"
+    >
+      Delete
+    </button>
   </div>
 </template>
 
@@ -43,6 +51,19 @@ export default {
     },
     gotoHome() {
       this.$router.push("/");
+    },
+    markItemAsDeleted() {
+      if (!confirm("Are you sure?")) {
+        return;
+      }
+      let key = this.$route.params.id;
+      console.log(key);
+      var editedItem = this.items[key];
+      console.log(editedItem);
+      editedItem.status = "DELETED";
+      editedItem.deletedTime = Date.now();
+      this.$firebaseRefs.items.child(key).set(editedItem);
+      this.gotoHome();
     },
   },
 };

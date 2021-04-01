@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ todo }}
     <div
       class="navbar navbar-expand-sm bg-light"
       v-for="urun in urunler"
@@ -14,12 +13,11 @@
       </router-link>
     </div>
 
-    <h1>Done</h1>
+    <h4>Done</h4>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Product</th>
-          <th>Quantity</th>
           <th>Type</th>
           <th>Option</th>
           <th>Person</th>
@@ -28,10 +26,14 @@
       </thead>
       <tbody>
         <tr v-for="item of orderedDoneItems" :key="item['.key']">
-          <td>{{ item.product }}</td>
-          <td>{{ item.quantity }}</td>
+          <td>{{ item.quantity }} x {{ item.product }}</td>
           <td>{{ item.types.chosen }}</td>
-          <td>{{ item.options }}</td>
+          <td>
+            <div v-for="(value, option) of item.options" :key="option">
+              <s v-if="!value"> {{ option }}</s>
+              <div v-if="value">{{ option }}</div>
+            </div>
+          </td>
           <td>{{ item.name }}</td>
           <td>
             <router-link
@@ -52,24 +54,27 @@
       </tbody>
     </table>
 
-    <h1>List Item ({{ summary }})</h1>
+    <h4>List Item ({{ summary }})</h4>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Product</th>
-          <th>Quantity</th>
           <th>Type</th>
           <th>Option</th>
           <th>Person</th>
-          <th colspan="3">Action</th>
+          <th colspan="2">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item of orderedItems" :key="item['.key']">
-          <td>{{ item.product }}</td>
-          <td>{{ item.quantity }}</td>
+          <td>{{ item.quantity }} x {{ item.product }}</td>
           <td>{{ item.types.chosen }}</td>
-          <td>{{ item.options }}</td>
+          <td>
+            <div v-for="(value, option) of item.options" :key="option">
+              <s v-if="!value"> {{ option }}</s>
+              <div v-if="value">{{ option }}</div>
+            </div>
+          </td>
           <td>{{ item.name }}</td>
           <td>
             <router-link
@@ -86,24 +91,15 @@
               Done
             </button>
           </td>
-          <td>
-            <button
-              @click="markItemAsDeleted(item['.key'])"
-              class="btn btn-danger"
-            >
-              Delete
-            </button>
-          </td>
         </tr>
       </tbody>
     </table>
 
-    <h1>Archived ({{ summaryArchived }})</h1>
+    <h4>Archived ({{ summaryArchived }})</h4>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Product</th>
-          <th>Quantity</th>
           <th>Type</th>
           <th>Option</th>
           <th>Person</th>
@@ -112,10 +108,14 @@
       </thead>
       <tbody>
         <tr v-for="item of orderedArchivedItems" :key="item['.key']">
-          <td>{{ item.product }}</td>
-          <td>{{ item.quantity }}</td>
+          <td>{{ item.quantity }} x {{ item.product }}</td>
           <td>{{ item.types.chosen }}</td>
-          <td>{{ item.options }}</td>
+          <td>
+            <div v-for="(value, option) of item.options" :key="option">
+              <s v-if="!value"> {{ option }}</s>
+              <div v-if="value">{{ option }}</div>
+            </div>
+          </td>
           <td>{{ item.name }}</td>
           <td>
             <router-link
@@ -133,12 +133,11 @@
       </tbody>
     </table>
 
-    <h1>Deleted</h1>
+    <h4>Deleted</h4>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Product</th>
-          <th>Quantity</th>
           <th>Type</th>
           <th>Option</th>
           <th>Person</th>
@@ -147,10 +146,14 @@
       </thead>
       <tbody>
         <tr v-for="item of orderedDeletedItems" :key="item['.key']">
-          <td>{{ item.product }}</td>
-          <td>{{ item.quantity }}</td>
+          <td>{{ item.quantity }} x {{ item.product }}</td>
           <td>{{ item.types.chosen }}</td>
-          <td>{{ item.options }}</td>
+          <td>
+            <div v-for="(value, option) of item.options" :key="option">
+              <s v-if="!value"> {{ option }}</s>
+              <div v-if="value">{{ option }}</div>
+            </div>
+          </td>
           <td>{{ item.name }}</td>
           <td>
             <router-link
@@ -240,6 +243,9 @@ export default {
   },
   methods: {
     markItemAsDone(key) {
+      if (!confirm("Are you sure?")) {
+        return;
+      }
       console.log(key);
       var editedItem = this.itemsObj[key];
       console.log(editedItem);
@@ -248,6 +254,9 @@ export default {
       this.$firebaseRefs.items.child(key).set(editedItem);
     },
     markItemAsDeleted(key) {
+      if (!confirm("Are you sure?")) {
+        return;
+      }
       console.log(key);
       var editedItem = this.itemsObj[key];
       console.log(editedItem);
@@ -256,6 +265,9 @@ export default {
       this.$firebaseRefs.items.child(key).set(editedItem);
     },
     markItemAsArchived(key) {
+      if (!confirm("Are you sure?")) {
+        return;
+      }
       console.log(key);
       var editedItem = this.itemsObj[key];
       console.log(editedItem);
@@ -264,6 +276,9 @@ export default {
       this.$firebaseRefs.items.child(key).set(editedItem);
     },
     markItemAsNew(key) {
+      if (!confirm("Are you sure?")) {
+        return;
+      }
       console.log(key);
       var editedItem = this.itemsObj[key];
       console.log(editedItem);
