@@ -184,7 +184,6 @@ export default {
       items: [],
       itemsObj: {},
       urunler: [],
-      x: {},
     };
   },
   firebase: {
