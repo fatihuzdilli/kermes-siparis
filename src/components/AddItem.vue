@@ -21,14 +21,23 @@ export default {
   },
   firebase: {
     items: db.ref("items"),
+    urunler: db.ref("urunler"),
+    urunlerObj: {
+      source: db.ref("urunler"),
+      asObject: true,
+    },
   },
   data() {
     return {
       newItem: {},
     };
   },
+  created() {
+    this.newItem = this.urunlerObj[this.$route.params.key];
+  },
   methods: {
     addItem() {
+      this.newItem.creationTime = Date.now();
       this.$firebaseRefs.items.push(this.newItem);
       this.gotoHome();
     },

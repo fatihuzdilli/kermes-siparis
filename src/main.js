@@ -23,7 +23,7 @@ const routes = [
   },
   {
     name: "Add",
-    path: "/add",
+    path: "/add/:key",
     component: AddItem
   },
   {

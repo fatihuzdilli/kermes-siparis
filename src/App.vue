@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="container">
+    <!--
     <nav class="navbar navbar-expand-sm bg-light">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -14,6 +15,7 @@
         </li>
       </ul>
     </nav>
+    -->
     <div class="gap">
       <router-view></router-view>
     </div>
