@@ -35,9 +35,6 @@
 import { db } from "../config/db";
 
 export default {
-  components: {
-    name: "ListItem",
-  },
   data() {
     return {
       items: [],
