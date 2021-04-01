@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ todo }}
     <div
       class="navbar navbar-expand-sm bg-light"
       v-for="urun in urunler"
@@ -12,7 +13,8 @@
         {{ urun.product }}
       </router-link>
     </div>
-    <h1>List Item</h1>
+
+    <h1>Done</h1>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -22,6 +24,44 @@
           <th>Option</th>
           <th>Person</th>
           <th colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item of orderedDoneItems" :key="item['.key']">
+          <td>{{ item.product }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.types.chosen }}</td>
+          <td>{{ item.options }}</td>
+          <td>{{ item.name }}</td>
+          <td>
+            <router-link
+              :to="{ name: 'Edit', params: { id: item['.key'] } }"
+              class="btn btn-warning"
+              >Edit</router-link
+            >
+          </td>
+          <td>
+            <button
+              @click="markItemAsArchived(item['.key'])"
+              class="btn btn-success"
+            >
+              Archive
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1>List Item ({{ summary }})</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Type</th>
+          <th>Option</th>
+          <th>Person</th>
+          <th colspan="3">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -39,8 +79,89 @@
             >
           </td>
           <td>
-            <button @click="deleteItem(item['.key'])" class="btn btn-danger">
+            <button
+              @click="markItemAsDone(item['.key'])"
+              class="btn btn-success"
+            >
+              Done
+            </button>
+          </td>
+          <td>
+            <button
+              @click="markItemAsDeleted(item['.key'])"
+              class="btn btn-danger"
+            >
               Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1>Archived ({{ summaryArchived }})</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Type</th>
+          <th>Option</th>
+          <th>Person</th>
+          <th colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item of orderedArchivedItems" :key="item['.key']">
+          <td>{{ item.product }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.types.chosen }}</td>
+          <td>{{ item.options }}</td>
+          <td>{{ item.name }}</td>
+          <td>
+            <router-link
+              :to="{ name: 'Edit', params: { id: item['.key'] } }"
+              class="btn btn-warning"
+              >Edit</router-link
+            >
+          </td>
+          <td>
+            <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
+              Unarchive
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1>Deleted</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Type</th>
+          <th>Option</th>
+          <th>Person</th>
+          <th colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item of orderedDeletedItems" :key="item['.key']">
+          <td>{{ item.product }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.types.chosen }}</td>
+          <td>{{ item.options }}</td>
+          <td>{{ item.name }}</td>
+          <td>
+            <router-link
+              :to="{ name: 'Edit', params: { id: item['.key'] } }"
+              class="btn btn-warning"
+              >Edit</router-link
+            >
+          </td>
+          <td>
+            <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
+              Undelete
             </button>
           </td>
         </tr>
@@ -57,22 +178,97 @@ export default {
   data() {
     return {
       items: [],
+      itemsObj: {},
       urunler: [],
       x: {},
     };
   },
   firebase: {
     items: db.ref("items"),
+    itemsObj: db.ref("items"),
     urunler: db.ref("urunler"),
   },
   computed: {
+    summary: function () {
+      let todoDesc = "";
+      for (let i = 0; i < this.urunler.length; i++) {
+        let p = this.urunler[i].product;
+        let ordersOfThat = _.filter(
+          this.items,
+          (item) => item.product === p && item.status == null
+        );
+        let quant = 0;
+        for (var index in ordersOfThat) {
+          quant += ordersOfThat[index].quantity;
+        }
+        todoDesc += p + ": " + quant + ", ";
+      }
+      return todoDesc;
+    },
+    summaryArchived: function () {
+      let todoDesc = "";
+      for (let i = 0; i < this.urunler.length; i++) {
+        let p = this.urunler[i].product;
+        let ordersOfThat = _.filter(
+          this.orderedArchivedItems,
+          (item) => item.product === p
+        );
+        let quant = 0;
+        for (var index in ordersOfThat) {
+          quant += ordersOfThat[index].quantity;
+        }
+        todoDesc += p + ": " + quant + ", ";
+      }
+      return todoDesc;
+    },
     orderedItems: function () {
-      return _.orderBy(this.items, "creationTime");
+      let ordered = _.orderBy(this.items, "creationTime");
+      return _.filter(ordered, (item) => item.status == null);
+    },
+    orderedDoneItems: function () {
+      let ordered = _.orderBy(this.items, "doneTime");
+      return _.filter(ordered, (item) => item.status === "DONE");
+    },
+    orderedDeletedItems: function () {
+      let ordered = _.orderBy(this.items, "deletedTime");
+      return _.filter(ordered, (item) => item.status === "DELETED");
+    },
+    orderedArchivedItems: function () {
+      let ordered = _.orderBy(this.items, "archivedTime");
+      return _.filter(ordered, (item) => item.status === "ARCHIVED");
     },
   },
   methods: {
-    deleteItem(key) {
-      this.$firebaseRefs.items.child(this.$route.params.id).set(this.newItem);
+    markItemAsDone(key) {
+      console.log(key);
+      var editedItem = this.itemsObj[key];
+      console.log(editedItem);
+      editedItem.status = "DONE";
+      editedItem.doneTime = Date.now();
+      this.$firebaseRefs.items.child(key).set(editedItem);
+    },
+    markItemAsDeleted(key) {
+      console.log(key);
+      var editedItem = this.itemsObj[key];
+      console.log(editedItem);
+      editedItem.status = "DELETED";
+      editedItem.deletedTime = Date.now();
+      this.$firebaseRefs.items.child(key).set(editedItem);
+    },
+    markItemAsArchived(key) {
+      console.log(key);
+      var editedItem = this.itemsObj[key];
+      console.log(editedItem);
+      editedItem.status = "ARCHIVED";
+      editedItem.archivedTime = Date.now();
+      this.$firebaseRefs.items.child(key).set(editedItem);
+    },
+    markItemAsNew(key) {
+      console.log(key);
+      var editedItem = this.itemsObj[key];
+      console.log(editedItem);
+      editedItem.status = null;
+      this.$firebaseRefs.items.child(key).set(editedItem);
     },
   },
 };

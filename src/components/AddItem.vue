@@ -22,18 +22,15 @@ export default {
   firebase: {
     items: db.ref("items"),
     urunler: db.ref("urunler"),
-    urunlerObj: {
-      source: db.ref("urunler"),
-      asObject: true,
-    },
   },
   data() {
     return {
+      urunler: {},
       newItem: {},
     };
   },
   created() {
-    this.newItem = this.urunlerObj[this.$route.params.key];
+    this.newItem = this.urunler[this.$route.params.key];
   },
   methods: {
     addItem() {

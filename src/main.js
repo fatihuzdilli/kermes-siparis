@@ -1,5 +1,5 @@
 import Vue from "vue";
-import VueFire from "vuefire";
+import { rtdbPlugin as VueFire } from "vuefire";
 import VueRouter from "vue-router";
 import NProgress from "nprogress";
 

@@ -21,10 +21,11 @@ export default {
   },
   firebase: {
     items: db.ref("items"),
+    /*
     itemsObj: {
       source: db.ref("items"),
       asObject: true,
-    },
+    },*/
   },
   data() {
     return {
@@ -32,7 +33,7 @@ export default {
     };
   },
   created() {
-    let item = this.itemsObj[this.$route.params.id];
+    let item = this.items[this.$route.params.id];
     this.newItem = item;
   },
   methods: {
