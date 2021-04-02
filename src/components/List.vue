@@ -27,7 +27,7 @@
         </thead>-->
         <tbody>
           <tr v-for="item of orderedDoneItems" :key="item['.key']">
-            <td @click="goToEdit(item['.key'])">
+            <td @click="goToEdit(item['.key'])" class="text-nowrap">
               {{ item.quantity }} x {{ item.product }}<br />{{
                 item.types.chosen
               }}<br />
@@ -67,7 +67,7 @@
         </thead>-->
       <tbody>
         <tr v-for="item of orderedItems" :key="item['.key']">
-          <td @click="goToEdit(item['.key'])">
+          <td @click="goToEdit(item['.key'])" class="text-nowrap">
             <b>{{ item.quantity }} x {{ item.product }}</b
             ><br />{{ item.types.chosen }}<br />
           </td>
@@ -103,7 +103,7 @@
         </thead>-->
       <tbody>
         <tr v-for="item of orderedArchivedItems" :key="item['.key']">
-          <td @click="goToEdit(item['.key'])">
+          <td @click="goToEdit(item['.key'])" class="text-nowrap">
             {{ item.quantity }} x {{ item.product }}<br />{{ item.types.chosen
             }}<br />
           </td>
@@ -135,7 +135,7 @@
         </thead>-->
       <tbody>
         <tr v-for="item of orderedDeletedItems" :key="item['.key']">
-          <td @click="goToEdit(item['.key'])">
+          <td @click="goToEdit(item['.key'])" class="text-nowrap">
             {{ item.quantity }} x {{ item.product }}<br />{{ item.types.chosen
             }}<br />
           </td>
@@ -189,7 +189,7 @@ export default {
         }
         todoDesc += p + ": " + quant + ", ";
       }
-      return todoDesc;
+      return todoDesc.slice(0, -2);
     },
     summaryArchived: function () {
       let todoDesc = "";
@@ -205,7 +205,7 @@ export default {
         }
         todoDesc += p + ": " + quant + ", ";
       }
-      return todoDesc;
+      return todoDesc.slice(0, -2);
     },
     orderedItems: function () {
       let ordered = _.orderBy(this.items, "creationTime");
