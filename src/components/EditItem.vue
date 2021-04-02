@@ -7,8 +7,8 @@
       title="Sipariş Güncelle"
       submitLabel="Güncelle"
     />
-    Order time: {{ new Date(newItem.creationTime) }}
     <br />
+    <b>Sipariş saati: </b>{{ new Date(newItem.creationTime) }}
     <br />
     <br />
     <br />

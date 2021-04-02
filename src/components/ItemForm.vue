@@ -2,48 +2,66 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <h3>{{ title }}: {{ editedItem.product }}</h3>
+        <h5>{{ title }}: {{ editedItem.product }}</h5>
       </div>
       <div class="card-body">
         <form v-on:submit.prevent="formSent">
           <div class="form-group">
-            <label>Şahıs:</label>
+            <label><b>Şahıs:</b></label>
             <input type="text" class="form-control" v-model="editedItem.name" />
           </div>
 
           <div class="form-group">
-            <label>Porsiyon:</label>
-            <select v-model="editedItem.quantity">
+            <label><b>Porsiyon:</b></label>
+            <select class="custom-select" v-model="editedItem.quantity">
               <option
-                v-for="option in Array(9).keys()"
+                v-for="option in [1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9]"
                 v-bind:key="option"
-                v-bind:value="option + 1"
+                v-bind:value="option"
               >
-                {{ option + 1 }}
+                {{ option }}
               </option>
             </select>
           </div>
 
           <div class="form-group">
-            <label>Servis Şekli:</label>
-            {{ editedItem.checkset }}
-            <div
-              v-for="typeSelection in editedItem.types.selection"
-              v-bind:key="typeSelection"
-            >
-              <input
-                type="radio"
-                name="types"
-                v-model="editedItem.types.chosen"
-                v-bind:id="typeSelection"
-                v-bind:value="typeSelection"
-              />
-              <label v-bind:for="typeSelection">{{ typeSelection }}</label>
+            <label><b>Servis Şekli:</b></label>
+            <div class="container">
+              <div class="row">
+                <div class="col" v-for="colIdx in [0, 1]" v-bind:key="colIdx">
+                  <div
+                    v-for="(typeSelection, idx) in editedItem.types.selection"
+                    v-bind:key="typeSelection"
+                  >
+                    <!-- <br v-if="idx === editedItem.types.selection.length / 2" />-->
+
+                    <div
+                      v-if="
+                        Math.floor(
+                          (idx / editedItem.types.selection.length) * 2
+                        ) === colIdx
+                      "
+                    >
+                      <input
+                        type="radio"
+                        name="types"
+                        v-model="editedItem.types.chosen"
+                        v-bind:id="typeSelection"
+                        v-bind:value="typeSelection"
+                        class="form-check-input"
+                      />
+                      <label v-bind:for="typeSelection">{{
+                        typeSelection
+                      }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
-            <label>Opsiyonlar:</label>
+            <label><b>Opsiyonlar:</b></label>
             {{ editedItem.checkset }}
             <div
               v-for="(value, option) in editedItem.options"

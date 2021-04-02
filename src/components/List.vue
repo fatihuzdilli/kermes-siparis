@@ -14,53 +14,57 @@
         </router-link>
       </div>
     </div>
-    <h4>Hazır</h4>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Ürün</th>
-          <th>Opsiyon</th>
-          <th>Şahıs</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item of orderedDoneItems" :key="item['.key']">
-          <td @click="goToEdit(item['.key'])">
-            {{ item.quantity }} x {{ item.product }}<br />{{ item.types.chosen
-            }}<br />
-          </td>
-          <td @click="goToEdit(item['.key'])">
-            <div v-for="(value, option) of item.options" :key="option">
-              <s v-if="!value"> {{ option }}</s>
-              <div v-if="value">{{ option }}</div>
-            </div>
-          </td>
-          <td @click="goToEdit(item['.key'])">
-            <b>{{ item.name }}</b>
-          </td>
-          <td>
-            <button
-              @click="markItemAsArchived(item['.key'])"
-              class="btn btn-success"
-            >
-              Teslim
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-if="orderedDoneItems.length > 0">
+      <h4>Hazır</h4>
+      <table class="table table-striped">
+        <!--<thead>
+          <tr>
+            <th>Ürün</th>
+            <th>Opsiyon</th>
+            <th>Şahıs</th>
+            <th></th>
+          </tr>
+        </thead>-->
+        <tbody>
+          <tr v-for="item of orderedDoneItems" :key="item['.key']">
+            <td @click="goToEdit(item['.key'])">
+              {{ item.quantity }} x {{ item.product }}<br />{{
+                item.types.chosen
+              }}<br />
+            </td>
+            <td @click="goToEdit(item['.key'])">
+              <div v-for="(value, option) of item.options" :key="option">
+                <s v-if="!value"> {{ option }}</s>
+                <div v-if="value">{{ option }}</div>
+              </div>
+            </td>
+            <td @click="goToEdit(item['.key'])">
+              <b>{{ item.name }}</b>
+            </td>
+            <td>
+              <button
+                @click="markItemAsArchived(item['.key'])"
+                class="btn btn-success"
+              >
+                Teslim
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <h4>Sipariş ({{ summary }})</h4>
+    <h4>Sipariş</h4>
+    {{ summary }}
     <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Ürün</th>
-          <th>Opsiyon</th>
-          <th>Şahıs</th>
-          <th></th>
-        </tr>
-      </thead>
+      <!--<thead>
+          <tr>
+            <th>Ürün</th>
+            <th>Opsiyon</th>
+            <th>Şahıs</th>
+            <th></th>
+          </tr>
+        </thead>-->
       <tbody>
         <tr v-for="item of orderedItems" :key="item['.key']">
           <td @click="goToEdit(item['.key'])">
@@ -86,16 +90,17 @@
       </tbody>
     </table>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <h4>Teslim Edilen ({{ summaryArchived }})</h4>
+    <h4>Teslim Edilen</h4>
+    {{ summaryArchived }}
     <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Ürün</th>
-          <th>Opsiyon</th>
-          <th>Şahıs</th>
-          <th></th>
-        </tr>
-      </thead>
+      <!--<thead>
+          <tr>
+            <th>Ürün</th>
+            <th>Opsiyon</th>
+            <th>Şahıs</th>
+            <th></th>
+          </tr>
+        </thead>-->
       <tbody>
         <tr v-for="item of orderedArchivedItems" :key="item['.key']">
           <td @click="goToEdit(item['.key'])">
@@ -120,14 +125,14 @@
 
     <h4>Silinen</h4>
     <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Ürün</th>
-          <th>Opsiyon</th>
-          <th>Şahıs</th>
-          <th></th>
-        </tr>
-      </thead>
+      <!--<thead>
+          <tr>
+            <th>Ürün</th>
+            <th>Opsiyon</th>
+            <th>Şahıs</th>
+            <th></th>
+          </tr>
+        </thead>-->
       <tbody>
         <tr v-for="item of orderedDeletedItems" :key="item['.key']">
           <td @click="goToEdit(item['.key'])">
