@@ -4,8 +4,8 @@
       v-bind:item="newItem"
       v-bind:onSubmit="updateItem"
       v-bind:onCancel="gotoHome"
-      title="Edit Item"
-      submitLabel="Update"
+      title="Sipariş Güncelle"
+      submitLabel="Güncelle"
     />
     Order time: {{ new Date(newItem.creationTime) }}
     <br />

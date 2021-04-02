@@ -7,12 +7,12 @@
       <div class="card-body">
         <form v-on:submit.prevent="formSent">
           <div class="form-group">
-            <label>Name:</label>
+            <label>Şahıs:</label>
             <input type="text" class="form-control" v-model="editedItem.name" />
           </div>
 
           <div class="form-group">
-            <label>Quantity:</label>
+            <label>Porsiyon:</label>
             <select v-model="editedItem.quantity">
               <option
                 v-for="option in Array(9).keys()"
@@ -25,7 +25,7 @@
           </div>
 
           <div class="form-group">
-            <label>Service Style:</label>
+            <label>Servis Şekli:</label>
             {{ editedItem.checkset }}
             <div
               v-for="typeSelection in editedItem.types.selection"
@@ -43,7 +43,7 @@
           </div>
 
           <div class="form-group">
-            <label>Service Options:</label>
+            <label>Opsiyonlar:</label>
             {{ editedItem.checkset }}
             <div
               v-for="(value, option) in editedItem.options"
@@ -69,7 +69,7 @@
               <input
                 type="button"
                 class="btn btn-warning"
-                value="Cancel"
+                value="İptal"
                 v-on:click="onCancel"
               />
             </div>

@@ -14,14 +14,14 @@
         </router-link>
       </div>
     </div>
-    <h4>Done</h4>
+    <h4>Hazır</h4>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Option</th>
-          <th>Person</th>
-          <th>Action</th>
+          <th>Ürün</th>
+          <th>Opsiyon</th>
+          <th>Şahıs</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -44,21 +44,21 @@
               @click="markItemAsArchived(item['.key'])"
               class="btn btn-success"
             >
-              Archive
+              Teslim
             </button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <h4>List Item ({{ summary }})</h4>
+    <h4>Sipariş ({{ summary }})</h4>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Option</th>
-          <th>Person</th>
-          <th>Action</th>
+          <th>Ürün</th>
+          <th>Opsiyon</th>
+          <th>Şahıs</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -79,21 +79,21 @@
               @click="markItemAsDone(item['.key'])"
               class="btn btn-success"
             >
-              Done
+              Hazır
             </button>
           </td>
         </tr>
       </tbody>
     </table>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <h4>Archived ({{ summaryArchived }})</h4>
+    <h4>Teslim Edilen ({{ summaryArchived }})</h4>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Option</th>
-          <th>Person</th>
-          <th>Action</th>
+          <th>Ürün</th>
+          <th>Opsiyon</th>
+          <th>Şahıs</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -111,21 +111,21 @@
           <td @click="goToEdit(item['.key'])">{{ item.name }}</td>
           <td>
             <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
-              Unarchive
+              Yenile
             </button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <h4>Deleted</h4>
+    <h4>Silinen</h4>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Option</th>
-          <th>Person</th>
-          <th>Action</th>
+          <th>Ürün</th>
+          <th>Opsiyon</th>
+          <th>Şahıs</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -143,7 +143,7 @@
           <td @click="goToEdit(item['.key'])">{{ item.name }}</td>
           <td>
             <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
-              Undelete
+              Yenile
             </button>
           </td>
         </tr>
@@ -221,7 +221,7 @@ export default {
   },
   methods: {
     markItemAsDone(key) {
-      if (!confirm("Are you sure?")) {
+      if (!confirm("Ürün hazırlandı mı?")) {
         return;
       }
       console.log(key);
@@ -232,7 +232,7 @@ export default {
       this.$firebaseRefs.items.child(key).set(editedItem);
     },
     markItemAsDeleted(key) {
-      if (!confirm("Are you sure?")) {
+      if (!confirm("Silmek istediginize emin misiniz?")) {
         return;
       }
       console.log(key);
@@ -243,7 +243,7 @@ export default {
       this.$firebaseRefs.items.child(key).set(editedItem);
     },
     markItemAsArchived(key) {
-      if (!confirm("Are you sure?")) {
+      if (!confirm("Ürün teslim edildi veya gönderildi mi?")) {
         return;
       }
       console.log(key);
@@ -254,7 +254,7 @@ export default {
       this.$firebaseRefs.items.child(key).set(editedItem);
     },
     markItemAsNew(key) {
-      if (!confirm("Are you sure?")) {
+      if (!confirm("Siparişi tekrar listeye geri eklemek istiyor musunuz?")) {
         return;
       }
       console.log(key);

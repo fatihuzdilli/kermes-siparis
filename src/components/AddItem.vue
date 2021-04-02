@@ -4,8 +4,8 @@
       v-bind:item="newItem"
       v-bind:onSubmit="addItem"
       v-bind:onCancel="gotoHome"
-      title="Add Item"
-      submitLabel="Add"
+      title="Sipariş Ekle"
+      submitLabel="Ekle"
     />
   </div>
 </template>
