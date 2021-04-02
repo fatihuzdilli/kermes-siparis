@@ -46,7 +46,7 @@
                 @click="markItemAsArchived(item['.key'])"
                 class="btn btn-success"
               >
-                Teslim
+                Gitti?
               </button>
             </td>
           </tr>
@@ -81,9 +81,9 @@
           <td>
             <button
               @click="markItemAsDone(item['.key'])"
-              class="btn btn-success"
+              class="btn btn-warning"
             >
-              Hazır
+              Hazır?
             </button>
           </td>
         </tr>
