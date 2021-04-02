@@ -22,7 +22,7 @@
       @click="markItemAsDeleted()"
       class="btn btn-danger"
     >
-      Delete
+      Sil
     </button>
   </div>
 </template>
@@ -62,7 +62,7 @@ export default {
       this.$router.push("/");
     },
     markItemAsDeleted() {
-      if (!confirm("Are you sure?")) {
+      if (!confirm("Sipariş gerçekten silinsin mi?")) {
         return;
       }
       let key = this.$route.params.id;
