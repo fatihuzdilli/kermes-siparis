@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="row">
     <ItemForm
       v-bind:item="newItem"
       v-bind:onSubmit="updateItem"
