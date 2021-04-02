@@ -19,27 +19,26 @@
       <thead>
         <tr>
           <th>Product</th>
-          <th>Type</th>
           <th>Option</th>
           <th>Person</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="item of orderedDoneItems"
-          :key="item['.key']"
-          @click="goToEdit(item['.key'])"
-        >
-          <td>{{ item.quantity }} x {{ item.product }}</td>
-          <td>{{ item.types.chosen }}</td>
-          <td>
+        <tr v-for="item of orderedDoneItems" :key="item['.key']">
+          <td @click="goToEdit(item['.key'])">
+            {{ item.quantity }} x {{ item.product }}<br />{{ item.types.chosen
+            }}<br />
+          </td>
+          <td @click="goToEdit(item['.key'])">
             <div v-for="(value, option) of item.options" :key="option">
               <s v-if="!value"> {{ option }}</s>
               <div v-if="value">{{ option }}</div>
             </div>
           </td>
-          <td>{{ item.name }}</td>
+          <td @click="goToEdit(item['.key'])">
+            <b>{{ item.name }}</b>
+          </td>
           <td>
             <button
               @click="markItemAsArchived(item['.key'])"
@@ -57,27 +56,24 @@
       <thead>
         <tr>
           <th>Product</th>
-          <th>Type</th>
           <th>Option</th>
           <th>Person</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="item of orderedItems"
-          :key="item['.key']"
-          @click="goToEdit(item['.key'])"
-        >
-          <td>{{ item.quantity }} x {{ item.product }}</td>
-          <td>{{ item.types.chosen }}</td>
-          <td>
+        <tr v-for="item of orderedItems" :key="item['.key']">
+          <td @click="goToEdit(item['.key'])">
+            <b>{{ item.quantity }} x {{ item.product }}</b
+            ><br />{{ item.types.chosen }}<br />
+          </td>
+          <td @click="goToEdit(item['.key'])">
             <div v-for="(value, option) of item.options" :key="option">
               <s v-if="!value"> {{ option }}</s>
               <div v-if="value">{{ option }}</div>
             </div>
           </td>
-          <td>{{ item.name }}</td>
+          <td @click="goToEdit(item['.key'])">{{ item.name }}</td>
           <td>
             <button
               @click="markItemAsDone(item['.key'])"
@@ -95,27 +91,24 @@
       <thead>
         <tr>
           <th>Product</th>
-          <th>Type</th>
           <th>Option</th>
           <th>Person</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="item of orderedArchivedItems"
-          :key="item['.key']"
-          @click="goToEdit(item['.key'])"
-        >
-          <td>{{ item.quantity }} x {{ item.product }}</td>
-          <td>{{ item.types.chosen }}</td>
-          <td>
+        <tr v-for="item of orderedArchivedItems" :key="item['.key']">
+          <td @click="goToEdit(item['.key'])">
+            {{ item.quantity }} x {{ item.product }}<br />{{ item.types.chosen
+            }}<br />
+          </td>
+          <td @click="goToEdit(item['.key'])">
             <div v-for="(value, option) of item.options" :key="option">
               <s v-if="!value"> {{ option }}</s>
               <div v-if="value">{{ option }}</div>
             </div>
           </td>
-          <td>{{ item.name }}</td>
+          <td @click="goToEdit(item['.key'])">{{ item.name }}</td>
           <td>
             <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
               Unarchive
@@ -130,27 +123,24 @@
       <thead>
         <tr>
           <th>Product</th>
-          <th>Type</th>
           <th>Option</th>
           <th>Person</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="item of orderedDeletedItems"
-          :key="item['.key']"
-          @click="goToEdit(item['.key'])"
-        >
-          <td>{{ item.quantity }} x {{ item.product }}</td>
-          <td>{{ item.types.chosen }}</td>
-          <td>
+        <tr v-for="item of orderedDeletedItems" :key="item['.key']">
+          <td @click="goToEdit(item['.key'])">
+            {{ item.quantity }} x {{ item.product }}<br />{{ item.types.chosen
+            }}<br />
+          </td>
+          <td @click="goToEdit(item['.key'])">
             <div v-for="(value, option) of item.options" :key="option">
               <s v-if="!value"> {{ option }}</s>
               <div v-if="value">{{ option }}</div>
             </div>
           </td>
-          <td>{{ item.name }}</td>
+          <td @click="goToEdit(item['.key'])">{{ item.name }}</td>
           <td>
             <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
               Undelete
