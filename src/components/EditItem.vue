@@ -7,6 +7,7 @@
       title="Edit Item"
       submitLabel="Update"
     />
+    Order time: {{ new Date(newItem.creationTime) }}
     <br />
     <br />
     <br />
