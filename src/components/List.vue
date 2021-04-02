@@ -22,11 +22,15 @@
           <th>Type</th>
           <th>Option</th>
           <th>Person</th>
-          <th colspan="2">Action</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item of orderedDoneItems" :key="item['.key']">
+        <tr
+          v-for="item of orderedDoneItems"
+          :key="item['.key']"
+          @click="goToEdit(item['.key'])"
+        >
           <td>{{ item.quantity }} x {{ item.product }}</td>
           <td>{{ item.types.chosen }}</td>
           <td>
@@ -36,13 +40,6 @@
             </div>
           </td>
           <td>{{ item.name }}</td>
-          <td>
-            <router-link
-              :to="{ name: 'Edit', params: { id: item['.key'] } }"
-              class="btn btn-warning"
-              >Edit</router-link
-            >
-          </td>
           <td>
             <button
               @click="markItemAsArchived(item['.key'])"
@@ -63,11 +60,15 @@
           <th>Type</th>
           <th>Option</th>
           <th>Person</th>
-          <th colspan="2">Action</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item of orderedItems" :key="item['.key']">
+        <tr
+          v-for="item of orderedItems"
+          :key="item['.key']"
+          @click="goToEdit(item['.key'])"
+        >
           <td>{{ item.quantity }} x {{ item.product }}</td>
           <td>{{ item.types.chosen }}</td>
           <td>
@@ -77,13 +78,6 @@
             </div>
           </td>
           <td>{{ item.name }}</td>
-          <td>
-            <router-link
-              :to="{ name: 'Edit', params: { id: item['.key'] } }"
-              class="btn btn-warning"
-              >Edit</router-link
-            >
-          </td>
           <td>
             <button
               @click="markItemAsDone(item['.key'])"
@@ -104,11 +98,15 @@
           <th>Type</th>
           <th>Option</th>
           <th>Person</th>
-          <th colspan="2">Action</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item of orderedArchivedItems" :key="item['.key']">
+        <tr
+          v-for="item of orderedArchivedItems"
+          :key="item['.key']"
+          @click="goToEdit(item['.key'])"
+        >
           <td>{{ item.quantity }} x {{ item.product }}</td>
           <td>{{ item.types.chosen }}</td>
           <td>
@@ -118,13 +116,6 @@
             </div>
           </td>
           <td>{{ item.name }}</td>
-          <td>
-            <router-link
-              :to="{ name: 'Edit', params: { id: item['.key'] } }"
-              class="btn btn-warning"
-              >Edit</router-link
-            >
-          </td>
           <td>
             <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
               Unarchive
@@ -142,11 +133,15 @@
           <th>Type</th>
           <th>Option</th>
           <th>Person</th>
-          <th colspan="2">Action</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item of orderedDeletedItems" :key="item['.key']">
+        <tr
+          v-for="item of orderedDeletedItems"
+          :key="item['.key']"
+          @click="goToEdit(item['.key'])"
+        >
           <td>{{ item.quantity }} x {{ item.product }}</td>
           <td>{{ item.types.chosen }}</td>
           <td>
@@ -156,13 +151,6 @@
             </div>
           </td>
           <td>{{ item.name }}</td>
-          <td>
-            <router-link
-              :to="{ name: 'Edit', params: { id: item['.key'] } }"
-              class="btn btn-warning"
-              >Edit</router-link
-            >
-          </td>
           <td>
             <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
               Undelete
@@ -284,6 +272,10 @@ export default {
       console.log(editedItem);
       editedItem.status = null;
       this.$firebaseRefs.items.child(key).set(editedItem);
+    },
+    goToEdit(key) {
+      console.log(key);
+      this.$router.push({ name: "Edit", params: { id: key } });
     },
   },
 };
