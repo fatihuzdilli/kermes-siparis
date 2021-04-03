@@ -220,7 +220,7 @@ export default {
       return _.filter(ordered, (item) => item.status === "DELETED");
     },
     orderedArchivedItems: function () {
-      let ordered = _.orderBy(this.items, "archivedTime");
+      let ordered = _.orderBy(this.items, "archivedTime", "desc");
       return _.filter(ordered, (item) => item.status === "ARCHIVED");
     },
   },
