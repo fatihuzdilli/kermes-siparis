@@ -226,9 +226,11 @@ export default {
   },
   methods: {
     markItemAsDone(key) {
+      /*
       if (!confirm("Ürün hazırlandı mı?")) {
         return;
       }
+      */
       console.log(key);
       var editedItem = this.itemsObj[key];
       console.log(editedItem);
@@ -248,9 +250,11 @@ export default {
       this.$firebaseRefs.items.child(key).set(editedItem);
     },
     markItemAsArchived(key) {
+      /*
       if (!confirm("Ürün teslim edildi veya gönderildi mi?")) {
         return;
       }
+      */
       console.log(key);
       var editedItem = this.itemsObj[key];
       console.log(editedItem);
