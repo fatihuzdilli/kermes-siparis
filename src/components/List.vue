@@ -39,7 +39,8 @@
               </div>
             </td>
             <td @click="goToEdit(item['.key'])">
-              <b>{{ item.name }}</b>
+              <b>{{ item.name }}</b
+              ><br />{{ time(item.doneTime) }}
             </td>
             <td>
               <button
@@ -77,7 +78,11 @@
               <div v-if="value">{{ option }}</div>
             </div>
           </td>
-          <td @click="goToEdit(item['.key'])">{{ item.name }}</td>
+          <td @click="goToEdit(item['.key'])">
+            {{ item.name }}<br /><label class="text-muted">{{
+              time(item.creationTime)
+            }}</label>
+          </td>
           <td>
             <button
               @click="markItemAsDone(item['.key'])"
@@ -90,7 +95,7 @@
       </tbody>
     </table>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <h4>Teslim Edilen</h4>
+    <h4>Teslim Edilen / Gönderilen</h4>
     {{ summaryArchived }}
     <table class="table table-striped">
       <!--<thead>
@@ -113,7 +118,10 @@
               <div v-if="value">{{ option }}</div>
             </div>
           </td>
-          <td @click="goToEdit(item['.key'])">{{ item.name }}</td>
+          <td @click="goToEdit(item['.key'])">
+            {{ item.name }}<br />
+            <b>{{ time(item.archivedTime) }}</b>
+          </td>
           <td>
             <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
               Yenile
@@ -275,6 +283,10 @@ export default {
     goToEdit(key) {
       console.log(key);
       this.$router.push({ name: "Edit", params: { id: key } });
+    },
+    time(timestamp) {
+      let date = new Date(timestamp);
+      return date.getHours() + ":" + date.getMinutes();
     },
   },
 };
