@@ -286,7 +286,16 @@ export default {
     },
     time(timestamp) {
       let date = new Date(timestamp);
-      return date.getHours() + ":" + date.getMinutes();
+      return (
+        date.getHours() +
+        ":" +
+        date
+          .getMinutes()
+          .toLocaleString("en-US", {
+            minimumIntegerDigits: 2,
+            useGrouping: false,
+          })
+      );
     },
   },
 };
