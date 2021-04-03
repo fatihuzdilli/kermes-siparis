@@ -94,7 +94,7 @@
         </tr>
       </tbody>
     </table>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br /><br /><br />
     <h4>Teslim Edilen / Gönderilen</h4>
     {{ summaryArchived }}
     <table class="table table-striped">
