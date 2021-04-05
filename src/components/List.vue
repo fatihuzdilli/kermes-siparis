@@ -119,8 +119,10 @@
             </div>
           </td>
           <td @click="goToEdit(item['.key'])">
-            {{ item.name }}<br />
-            <b>{{ time(item.archivedTime) }}</b>
+            {{ item.name }}<br /><label class="text-muted"
+              >{{ time(item.creationTime) }} -</label
+            >
+            <b> {{ time(item.archivedTime) }}</b>
           </td>
           <td>
             <button @click="markItemAsNew(item['.key'])" class="btn btn-danger">
@@ -289,12 +291,10 @@ export default {
       return (
         date.getHours() +
         ":" +
-        date
-          .getMinutes()
-          .toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })
+        date.getMinutes().toLocaleString("en-US", {
+          minimumIntegerDigits: 2,
+          useGrouping: false,
+        })
       );
     },
   },
