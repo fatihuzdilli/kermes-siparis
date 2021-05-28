@@ -8,6 +8,7 @@ import App from "./App.vue";
 import AddItem from "./components/AddItem.vue";
 import EditItem from "./components/EditItem.vue";
 import List from "./components/List.vue";
+import Admin from "./components/Admin.vue";
 
 import "../node_modules/nprogress/nprogress.css";
 
@@ -30,6 +31,11 @@ const routes = [
     name: "Edit",
     path: "/edit/:id",
     component: EditItem
+  },
+  {
+    name: "Admin",
+    path: "/admin/",
+    component: Admin
   }
 ];
 
