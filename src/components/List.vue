@@ -15,7 +15,7 @@
       </div>
     </div>
     <div v-if="orderedDoneItems.length > 0">
-      <h4>Hazır</h4>
+      <h4>Yolda</h4>
       <table class="table table-striped">
         <!--<thead>
           <tr>
@@ -35,7 +35,8 @@
             <td @click="goToEdit(item['.key'])">
               <div v-for="(value, option) of item.options" :key="option">
                 <s v-if="!value"> {{ option }}</s>
-                <div v-if="value">{{ option }}</div>
+                <!-- uncomment following if you want the options to be listed: -->
+                <!--<div v-if="value">{{ option }}</div>-->
               </div>
             </td>
             <td @click="goToEdit(item['.key'])">
@@ -47,7 +48,7 @@
                 @click="markItemAsArchived(item['.key'])"
                 class="btn btn-success"
               >
-                Gitti?
+                TeslimEt
               </button>
             </td>
           </tr>
@@ -55,7 +56,7 @@
       </table>
     </div>
 
-    <h4>Sipariş</h4>
+    <h4>Açık Sipariş</h4>
     {{ summary }}
     <table class="table table-striped">
       <!--<thead>
@@ -75,7 +76,8 @@
           <td @click="goToEdit(item['.key'])">
             <div v-for="(value, option) of item.options" :key="option">
               <s v-if="!value"> {{ option }}</s>
-              <div v-if="value">{{ option }}</div>
+              <!-- uncomment following if you want the options to be listed: -->
+              <!-- <div v-if="value">{{ option }}</div> -->
             </div>
           </td>
           <td @click="goToEdit(item['.key'])">
@@ -88,14 +90,14 @@
               @click="markItemAsDone(item['.key'])"
               class="btn btn-warning"
             >
-              Hazır?
+              Gönder
             </button>
           </td>
         </tr>
       </tbody>
     </table>
     <br /><br /><br /><br /><br /><br /><br /><br />
-    <h4>Teslim Edilen / Gönderilen</h4>
+    <h4>Teslim Edilen</h4>
     {{ summaryArchived }}
     <table class="table table-striped">
       <!--<thead>
@@ -115,7 +117,8 @@
           <td @click="goToEdit(item['.key'])">
             <div v-for="(value, option) of item.options" :key="option">
               <s v-if="!value"> {{ option }}</s>
-              <div v-if="value">{{ option }}</div>
+              <!-- uncomment following if you want the options to be listed: -->
+              <!-- <div v-if="value">{{ option }}</div> -->
             </div>
           </td>
           <td @click="goToEdit(item['.key'])">
@@ -152,7 +155,8 @@
           <td @click="goToEdit(item['.key'])">
             <div v-for="(value, option) of item.options" :key="option">
               <s v-if="!value"> {{ option }}</s>
-              <div v-if="value">{{ option }}</div>
+              <!-- uncomment following if you want the options to be listed: -->
+              <!-- <div v-if="value">{{ option }}</div> -->
             </div>
           </td>
           <td @click="goToEdit(item['.key'])">{{ item.name }}</td>
