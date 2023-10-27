@@ -313,6 +313,8 @@ export default {
   created() {
     // Access the URL parameter and set it to this.productFilter. This is probably a hack. We should use vue router feature instead maybe.
     this.productFilter = this.$route.params.productFilter || '';
+    console.log('productFilter:', this.productFilter);
+    console.log('All Items:', this.items);
   },
 };
 </script>
