@@ -29,7 +29,7 @@
       <tbody>
         <tr v-for="item of orderedItems" :key="item['.key']">
           <td @click="goToEdit(item['.key'])" class="text-nowrap">
-            <b>{{ item.quantity }} x {{ item.product }}</b
+            <b><!--{{ item.quantity }} x -->{{ item.product }}</b
             ><br />{{ item.types.chosen }}<br />
           </td>
           <td @click="goToEdit(item['.key'])">
@@ -72,7 +72,7 @@
         <tbody>
           <tr v-for="item of orderedDoneItems" :key="item['.key']">
             <td @click="goToEdit(item['.key'])" class="text-nowrap">
-              {{ item.quantity }} x {{ item.product }}<br />{{
+              <!--{{ item.quantity }} x -->{{ item.product }}<br />{{
                 item.types.chosen
               }}<br />
             </td>
@@ -116,7 +116,7 @@
       <tbody>
         <tr v-for="item of orderedArchivedItems" :key="item['.key']">
           <td @click="goToEdit(item['.key'])" class="text-nowrap">
-            {{ item.quantity }} x {{ item.product }}<br />{{ item.types.chosen
+            <!--{{ item.quantity }} x -->{{ item.product }}<br />{{ item.types.chosen
             }}<br />
           </td>
           <td @click="goToEdit(item['.key'])">
@@ -154,7 +154,7 @@
       <tbody>
         <tr v-for="item of orderedDeletedItems" :key="item['.key']">
           <td @click="goToEdit(item['.key'])" class="text-nowrap">
-            {{ item.quantity }} x {{ item.product }}<br />{{ item.types.chosen
+            <!--{{ item.quantity }} x -->{{ item.product }}<br />{{ item.types.chosen
             }}<br />
           </td>
           <td @click="goToEdit(item['.key'])">
