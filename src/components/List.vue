@@ -14,6 +14,50 @@
         </router-link>
       </div>
     </div>
+    
+    <h4>Açık Sipariş</h4>
+    {{ summary }}
+    <table class="table table-striped">
+      <!--<thead>
+          <tr>
+            <th>Ürün</th>
+            <th>Opsiyon</th>
+            <th>Şahıs</th>
+            <th></th>
+          </tr>
+        </thead>-->
+      <tbody>
+        <tr v-for="item of orderedItems" :key="item['.key']">
+          <td @click="goToEdit(item['.key'])" class="text-nowrap">
+            <b>{{ item.quantity }} x {{ item.product }}</b
+            ><br />{{ item.types.chosen }}<br />
+          </td>
+          <td @click="goToEdit(item['.key'])">
+            <div v-for="(value, option) of item.options" :key="option">
+              <s v-if="!value"> {{ option }}</s>
+              <!-- uncomment following if you want the options to be listed: -->
+              <!-- <div v-if="value">{{ option }}</div> -->
+            </div>
+          </td>
+          <td @click="goToEdit(item['.key'])">
+            {{ item.name }}<br /><label class="text-muted">{{
+              time(item.creationTime)
+            }}</label>
+          </td>
+          <td>
+            <button
+              @click="markItemAsDone(item['.key'])"
+              class="btn btn-warning"
+            >
+              Gönder
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br /><br />
+    
     <div v-if="orderedDoneItems.length > 0">
       <h4>Yolda</h4>
       <table class="table table-striped">
@@ -56,46 +100,7 @@
       </table>
     </div>
 
-    <h4>Açık Sipariş</h4>
-    {{ summary }}
-    <table class="table table-striped">
-      <!--<thead>
-          <tr>
-            <th>Ürün</th>
-            <th>Opsiyon</th>
-            <th>Şahıs</th>
-            <th></th>
-          </tr>
-        </thead>-->
-      <tbody>
-        <tr v-for="item of orderedItems" :key="item['.key']">
-          <td @click="goToEdit(item['.key'])" class="text-nowrap">
-            <b>{{ item.quantity }} x {{ item.product }}</b
-            ><br />{{ item.types.chosen }}<br />
-          </td>
-          <td @click="goToEdit(item['.key'])">
-            <div v-for="(value, option) of item.options" :key="option">
-              <s v-if="!value"> {{ option }}</s>
-              <!-- uncomment following if you want the options to be listed: -->
-              <!-- <div v-if="value">{{ option }}</div> -->
-            </div>
-          </td>
-          <td @click="goToEdit(item['.key'])">
-            {{ item.name }}<br /><label class="text-muted">{{
-              time(item.creationTime)
-            }}</label>
-          </td>
-          <td>
-            <button
-              @click="markItemAsDone(item['.key'])"
-              class="btn btn-warning"
-            >
-              Gönder
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
     <br /><br /><br /><br /><br /><br /><br /><br />
     <h4>Teslim Edilen</h4>
     {{ summaryArchived }}
