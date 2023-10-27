@@ -226,23 +226,20 @@ export default {
       }
       return todoDesc.slice(0, -2);
     },
-    filteredItems: function () { // To filter items by product, pass a url param 'productName' matching the product.
-      return this.items.filter(item => item.product === this.productName);
-    },
     orderedItems: function () {
-      let ordered = _.orderBy(this.filteredItems, "creationTime");
+      let ordered = _.orderBy(this.items, "creationTime");
       return _.filter(ordered, (item) => item.status == null);
     },
     orderedDoneItems: function () {
-      let ordered = _.orderBy(this.filteredItems, "doneTime");
+      let ordered = _.orderBy(this.items, "doneTime");
       return _.filter(ordered, (item) => item.status === "DONE");
     },
     orderedDeletedItems: function () {
-      let ordered = _.orderBy(this.filteredItems, "deletedTime");
+      let ordered = _.orderBy(this.items, "deletedTime");
       return _.filter(ordered, (item) => item.status === "DELETED");
     },
     orderedArchivedItems: function () {
-      let ordered = _.orderBy(this.filteredItems, "archivedTime", "desc");
+      let ordered = _.orderBy(this.items, "archivedTime", "desc");
       return _.filter(ordered, (item) => item.status === "ARCHIVED");
     },
   },
@@ -309,12 +306,6 @@ export default {
         })
       );
     },
-  },
-  created() {
-    // Access the URL parameter and set it to this.productFilter. This is probably a hack. We should use vue router feature instead maybe.
-    this.productFilter = this.$route.params.productFilter || '';
-    console.log('productFilter:', this.productFilter);
-    console.log('All Items:', this.items);
   },
 };
 </script>
