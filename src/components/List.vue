@@ -234,20 +234,23 @@ export default {
       }
       return todoDesc.slice(0, -2);
     },
+    filteredItems: function() {
+      return this.items.filter(item => productFilter[item.product] === false || productFilter[item.product] === "");
+    },
     orderedItems: function () {
-      let ordered = _.orderBy(this.items, "creationTime");
+      let ordered = _.orderBy(this.filteredItems, "creationTime");
       return _.filter(ordered, (item) => item.status == null);
     },
     orderedDoneItems: function () {
-      let ordered = _.orderBy(this.items, "doneTime");
+      let ordered = _.orderBy(this.filteredItems, "doneTime");
       return _.filter(ordered, (item) => item.status === "DONE");
     },
     orderedDeletedItems: function () {
-      let ordered = _.orderBy(this.items, "deletedTime");
+      let ordered = _.orderBy(this.filteredItems, "deletedTime");
       return _.filter(ordered, (item) => item.status === "DELETED");
     },
     orderedArchivedItems: function () {
-      let ordered = _.orderBy(this.items, "archivedTime", "desc");
+      let ordered = _.orderBy(this.filteredItems, "archivedTime", "desc");
       return _.filter(ordered, (item) => item.status === "ARCHIVED");
     },
   },
