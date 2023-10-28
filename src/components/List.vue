@@ -235,7 +235,7 @@ export default {
       return todoDesc.slice(0, -2);
     },
     filteredItems: function() {
-      return this.items.filter(item => productFilter[item.product] === false || productFilter[item.product] === "");
+      return this.items.filter(item => productFilter === null || productFilter[item.product] === null || productFilter[item.product] === false || productFilter[item.product] === "");
     },
     orderedItems: function () {
       let ordered = _.orderBy(this.filteredItems, "creationTime");
