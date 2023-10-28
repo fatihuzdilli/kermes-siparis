@@ -193,6 +193,7 @@ export default {
       items: [],
       itemsObj: {},
       urunler: [],
+      productFilter: {},
     };
   },
   firebase: {
