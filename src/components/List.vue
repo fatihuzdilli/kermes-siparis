@@ -6,12 +6,6 @@
         v-for="urun in urunler"
         v-bind:key="urun['.key']"
       >
-        
-        <input
-          type="checkbox"
-          name="options"
-          v-model="productFilter[urun.product]"
-        />
         <router-link
           :to="{ name: 'Add', params: { key: urun['.key'] } }"
           class="btn btn-danger"
@@ -34,7 +28,6 @@
         </thead>-->
       <tbody>
         <tr v-for="item of orderedItems" :key="item['.key']">
-          {{ productFilter[item.product] }}
           <td @click="goToEdit(item['.key'])" class="text-nowrap">
             <b><!--{{ item.quantity }} x -->{{ item.product }}</b
             ><br />{{ item.types.chosen }}<br />
@@ -193,7 +186,6 @@ export default {
       items: [],
       itemsObj: {},
       urunler: [],
-      productFilter: {},
     };
   },
   firebase: {
@@ -234,23 +226,20 @@ export default {
       }
       return todoDesc.slice(0, -2);
     },
-    filteredItems: function() {
-      return this.items.filter(item => productFilter === null || productFilter[item.product] === null || productFilter[item.product] === false || productFilter[item.product] === "");
-    },
     orderedItems: function () {
-      let ordered = _.orderBy(this.filteredItems, "creationTime");
+      let ordered = _.orderBy(this.items, "creationTime");
       return _.filter(ordered, (item) => item.status == null);
     },
     orderedDoneItems: function () {
-      let ordered = _.orderBy(this.filteredItems, "doneTime");
+      let ordered = _.orderBy(this.items, "doneTime");
       return _.filter(ordered, (item) => item.status === "DONE");
     },
     orderedDeletedItems: function () {
-      let ordered = _.orderBy(this.filteredItems, "deletedTime");
+      let ordered = _.orderBy(this.items, "deletedTime");
       return _.filter(ordered, (item) => item.status === "DELETED");
     },
     orderedArchivedItems: function () {
-      let ordered = _.orderBy(this.filteredItems, "archivedTime", "desc");
+      let ordered = _.orderBy(this.items, "archivedTime", "desc");
       return _.filter(ordered, (item) => item.status === "ARCHIVED");
     },
   },
