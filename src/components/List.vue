@@ -6,6 +6,12 @@
         v-for="urun in urunler"
         v-bind:key="urun['.key']"
       >
+        
+        <input
+          type="checkbox"
+          name="options"
+          v-model="productFilter[urun.product]"
+        />
         <router-link
           :to="{ name: 'Add', params: { key: urun['.key'] } }"
           class="btn btn-danger"
@@ -28,6 +34,7 @@
         </thead>-->
       <tbody>
         <tr v-for="item of orderedItems" :key="item['.key']">
+          {{ productFilter[item.product] }}
           <td @click="goToEdit(item['.key'])" class="text-nowrap">
             <b><!--{{ item.quantity }} x -->{{ item.product }}</b
             ><br />{{ item.types.chosen }}<br />
