@@ -15,7 +15,7 @@
             <label><b>Porsiyon:</b></label>
             <select class="custom-select" v-model="editedItem.quantity">
               <option
-                v-for="option in [1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9]"
+                v-for="option in [1]"
                 v-bind:key="option"
                 v-bind:value="option"
               >
