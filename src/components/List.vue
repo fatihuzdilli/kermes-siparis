@@ -174,16 +174,14 @@
       </tbody>
     </table>
     
-    <div>
-      <label><b>Gizlemek istedikleriniz:</b></label>
-      <div v-for="urun in urunler" v-bind:key="urun['.key']">
-      <input
-                type="checkbox"
-                name="hiddenstate"
-                v-model="productsHidden[urun.product]"
-              />
-          {{ urun.product }} - {{ productsHidden[urun.product] }}<br/>
-      </div>
+    <h4>Gizlemek istedikleriniz</h4>
+    <div v-for="urun in urunler" v-bind:key="urun['.key']">
+    <input
+              type="checkbox"
+              name="hiddenstate"
+              v-model="productsHidden[urun.product]"
+            />
+        {{ urun.product }} - {{ productsHidden[urun.product] }}<br/>
     </div>
   </div>
 </template>
@@ -239,20 +237,23 @@ export default {
       }
       return todoDesc.slice(0, -2);
     },
+    nonHiddenItems: function () {
+      return _.filter(this.items, (item) => this.productsHidden[item.product] != true);
+    },
     orderedItems: function () {
-      let ordered = _.orderBy(this.items, "creationTime");
+      let ordered = _.orderBy(this.nonHiddenItems, "creationTime");
       return _.filter(ordered, (item) => item.status == null);
     },
     orderedDoneItems: function () {
-      let ordered = _.orderBy(this.items, "doneTime");
+      let ordered = _.orderBy(this.nonHiddenItems, "doneTime");
       return _.filter(ordered, (item) => item.status === "DONE");
     },
     orderedDeletedItems: function () {
-      let ordered = _.orderBy(this.items, "deletedTime");
+      let ordered = _.orderBy(this.nonHiddenItems, "deletedTime");
       return _.filter(ordered, (item) => item.status === "DELETED");
     },
     orderedArchivedItems: function () {
-      let ordered = _.orderBy(this.items, "archivedTime", "desc");
+      let ordered = _.orderBy(this.nonHiddenItems, "archivedTime", "desc");
       return _.filter(ordered, (item) => item.status === "ARCHIVED");
     },
   },
