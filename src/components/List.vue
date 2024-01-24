@@ -182,7 +182,7 @@
                 name="hiddenstate"
                 v-model="productsHidden[urun.product]"
               />
-          {{ urun.product }} - {{ productsHidden[urun.product] }}<br\>
+          {{ urun.product }} - {{ productsHidden[urun.product] }}<br/>
       </div>
     </div>
   </div>
