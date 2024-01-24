@@ -173,6 +173,17 @@
         </tr>
       </tbody>
     </table>
+    
+    <div>
+      <label><b>Gizlemek istedikleriniz:</b></label>
+      <div v-for="urun in urunler" v-bind:key="urun['.key']">
+      <input
+                type="checkbox"
+                name="hiddenstate"
+                v-model="productsHidden[urun.product]"
+              />
+          {{ urun.product }} - {{ productsHidden[urun.product] }}<br\>
+      </div>
   </div>
 </template>
 
@@ -186,6 +197,7 @@ export default {
       items: [],
       itemsObj: {},
       urunler: [],
+      productsHidden: {},
     };
   },
   firebase: {
