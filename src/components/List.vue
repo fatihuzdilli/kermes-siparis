@@ -184,6 +184,7 @@
               />
           {{ urun.product }} - {{ productsHidden[urun.product] }}<br\>
       </div>
+    </div>
   </div>
 </template>
 
